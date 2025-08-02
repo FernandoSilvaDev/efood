@@ -21,11 +21,9 @@ export const Logo = styled.div`
 
 export const Links = styled.ul`
   display: flex;
-  text-decoration: none;
 `
 
-export const LinkItem = styled.a`
-  text-decoration: none;
+export const LinkItem = styled.li`
   margin-right: 8px;
   margin-top: 32px;
 `

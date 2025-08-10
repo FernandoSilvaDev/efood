@@ -1,23 +1,28 @@
-import Menus from '../../models/Menu'
+import { RestaurantType } from '../../pages/Home'
 import Menu from '../Menu'
 import { Container, List } from './styles'
 
 export type Props = {
-  menus: Menus[]
+  menus: RestaurantType[]
 }
-
 const MenuList = ({ menus }: Props) => (
   <Container className="container">
     <div>
       <List>
-        {menus.map((menu: Menus) => (
-          <Menu
-            key={menu.id}
-            description={menu.description}
-            image={menu.image}
-            title={menu.title}
-          />
-        ))}
+        {menus.map((item) =>
+          item.cardapio.map((prato) => (
+            <li key={prato.id}>
+              <Menu
+                id={prato.id}
+                description={prato.descricao}
+                image={prato.foto}
+                name={prato.nome}
+                portion={prato.porcao}
+                price={prato.preco}
+              />
+            </li>
+          ))
+        )}
       </List>
     </div>
   </Container>

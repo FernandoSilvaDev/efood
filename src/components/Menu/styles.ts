@@ -18,13 +18,24 @@ export const Card = styled.div`
     justify-content: space-between;
     margin-bottom: 8px;
   }
+
+  img {
+    width: 100%;
+    max-height: 167px;
+    height: auto;
+    object-fit: cover;
+  }
+
+  button {
+    cursor: pointer;
+  }
 `
 
 export const Title = styled.h3`
-  font-weight: bold;
   font-size: 16px;
   display: block;
   margin-top: 8px;
+  font-weight: 900;
 `
 
 export const Descricao = styled.p`
@@ -32,6 +43,7 @@ export const Descricao = styled.p`
   margin-bottom: 8px;
   line-height: 22px;
   font-weight: 400;
+  font-style: oblique;
 `
 
 export const Grade = styled.div`
@@ -49,4 +61,78 @@ export const Infos = styled.div`
   position: absolute;
   top: 16px;
   right: 16px;
+`
+
+export const Modal = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  display: none; //Para que o modal seja visivel somente ao clicar na imagem
+  align-items: center;
+  justify-content: center;
+
+  &.visivel {
+    //Ação de ao clicar na imagem
+    display: flex;
+  }
+
+  .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+`
+
+export const ModalContent = styled.div`
+  background-color: ${colors.redLight};
+  color: ${colors.white};
+  max-width: 1024px;
+  position: relative;
+  z-index: 1;
+
+  display: flex;
+
+  header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 16px;
+
+    h4 {
+      font-size: 18px;
+      font-weight: bold;
+    }
+  }
+
+  p {
+    margin-bottom: 16px;
+    margin-right: 32px;
+  }
+
+  .imgItem {
+    margin: 32px 24px 32px 32px;
+    width: 280px;
+    height: 280px;
+    object-fit: cover;
+  }
+
+  .close {
+    margin: 8px 8px 8px 0;
+
+    width: 16px;
+    height: 16px;
+    margin-left: auto;
+    cursor: pointer;
+  }
+
+  Button {
+    width: fit-content;
+    padding: 4px 7px;
+    cursor: pointer;
+  }
 `

@@ -1,28 +1,39 @@
-import Pratos from '../../models/Pratos'
+import { RestaurantType } from '../../pages/Home'
 import Restaurant from '../Restaurant'
 import { Container, List } from './styles'
 
 export type Props = {
-  pratos: Pratos[]
+  perfis: RestaurantType[]
 }
 
-const RestaurantList = ({ pratos }: Props) => (
-  <Container>
-    <div className="container">
-      <List>
-        {pratos.map((prato: Pratos) => (
-          <Restaurant
-            key={prato.id}
-            description={prato.description}
-            image={prato.image}
-            infos={prato.infos}
-            grade={prato.grade}
-            title={prato.title}
-          />
-        ))}
-      </List>
-    </div>
-  </Container>
-)
+const RestaurantList = ({ perfis }: Props) => {
+  //Colocar ou não a Tag de Destaque no Perfil do restaurante
+  // Função para renderizar as Tags
+  const getDestaqueTag = (perfil: RestaurantType): string => {
+    return perfil.destacado ? 'Destaque da semana' : ''
+  }
+
+  return (
+    <Container>
+      <div className="container">
+        <List>
+          {perfis.map((perfil) => (
+            <li key={perfil.id}>
+              <Restaurant
+                id={perfil.id}
+                description={perfil.descricao}
+                image={perfil.capa}
+                type={perfil.tipo}
+                grade={perfil.avaliacao}
+                title={perfil.titulo}
+                destacado={getDestaqueTag(perfil)}
+              />
+            </li>
+          ))}
+        </List>
+      </div>
+    </Container>
+  )
+}
 
 export default RestaurantList

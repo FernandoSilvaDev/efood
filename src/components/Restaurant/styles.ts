@@ -9,6 +9,13 @@ export const Card = styled.div`
   margin-bottom: 48px;
   position: relative;
 
+  img {
+    width: 100%;
+    max-height: 217px;
+    height: auto;
+    object-fit: cover;
+  }
+
   ${TagContainer} {
     margin-right: 8px;
   }

@@ -2,6 +2,7 @@ import styled from 'styled-components'
 import { colors } from '../../styles'
 
 export const Image = styled.div`
+  position: relative;
   width: 100%;
   height: 186px;
   display: block;
@@ -9,10 +10,12 @@ export const Image = styled.div`
   background-size: cover;
 
   .container {
+    position: relative;
     padding-top: 63px;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    z-index: 1;
   }
 `
 
@@ -58,7 +61,7 @@ export const ImageBanner = styled.div`
 
   .banner {
     position: relative; /* necessário para z-index funcionar */
-    z-index: 2; /* maior que o ::before */
+    z-index: 1; /* maior que o ::before */
     display: block;
   }
 `

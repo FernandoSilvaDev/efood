@@ -1,58 +1,26 @@
+import { useParams } from 'react-router-dom'
+import { useEffect, useState } from 'react'
 import MenuList from '../../components/MenuList'
-import Menu from '../../models/Menu'
-import Pizza from '../../assets/img_products/Pizza.jpg'
 import HeaderPerfil from '../../components/HeaderPerfil'
+import { RestaurantType } from '../Home'
 
-const perfil: Menu[] = [
-  {
-    id: 1,
-    description:
-      'A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade! ',
-    image: Pizza,
-    title: 'Pizza'
-  },
-  {
-    id: 2,
-    description:
-      'A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade! ',
-    image: Pizza,
-    title: 'Pizza'
-  },
-  {
-    id: 3,
-    description:
-      'A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade! ',
-    image: Pizza,
-    title: 'Pizza'
-  },
-  {
-    id: 4,
-    description:
-      'A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade! ',
-    image: Pizza,
-    title: 'Pizza'
-  },
-  {
-    id: 5,
-    description:
-      'A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade! ',
-    image: Pizza,
-    title: 'Pizza'
-  },
-  {
-    id: 6,
-    description:
-      'A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade! ',
-    image: Pizza,
-    title: 'Pizza'
-  }
-]
+const Perfis = () => {
+  const { id } = useParams()
+  // const [restaurante, setRestaurante] = useState<RestaurantType | null>(null)
 
-const Perfis = () => (
-  <>
-    <HeaderPerfil />
-    <MenuList menus={perfil} />
-  </>
-)
+  const [restaurante, setRestaurante] = useState<RestaurantType>()
+
+  useEffect(() => {
+    fetch(`https://ebac-fake-api.vercel.app/api/efood/restaurantes/${id}`)
+      .then((res) => res.json())
+      .then((res) => setRestaurante(res))
+  }, [id])
+  return (
+    <>
+      <HeaderPerfil />
+      <MenuList menus={restaurante ? [restaurante] : []} />
+    </>
+  )
+}
 
 export default Perfis

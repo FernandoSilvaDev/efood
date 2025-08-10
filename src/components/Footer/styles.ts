@@ -21,6 +21,7 @@ export const Logo = styled.div`
 
 export const Links = styled.ul`
   display: flex;
+  list-style-type: none;
 `
 
 export const LinkItem = styled.li`

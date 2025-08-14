@@ -1,5 +1,5 @@
 import { RestaurantType } from '../../pages/Home'
-import Menu from '../Menu'
+import Perfil from '../Perfil'
 import { Container, List } from './styles'
 
 export type Props = {
@@ -12,7 +12,7 @@ const MenuList = ({ menus }: Props) => (
         {menus.map((item) =>
           item.cardapio.map((prato) => (
             <li key={prato.id}>
-              <Menu
+              <Perfil
                 id={prato.id}
                 description={prato.descricao}
                 image={prato.foto}

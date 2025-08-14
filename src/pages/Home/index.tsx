@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react'
 import RestaurantList from '../../components/RestaurantList'
 import HeaderHome from '../../components/HeaderHome'
+import { useGetHomeQuery } from '../../Services/api'
 
 export interface RestaurantItem {
   type: 'image'
@@ -26,19 +26,16 @@ export type RestaurantType = {
 }
 
 const Home = () => {
-  const [restaurantes, setRestaurantes] = useState<RestaurantType[]>([])
-
-  useEffect(() => {
-    fetch('https://ebac-fake-api.vercel.app/api/efood/restaurantes')
-      .then((res) => res.json())
-      .then((res) => setRestaurantes(res))
-  }, [])
-  return (
-    <>
-      <HeaderHome />
-      <RestaurantList perfis={restaurantes} />
-    </>
-  )
+  const { data: restaurantes, isLoading } = useGetHomeQuery()
+  if (restaurantes) {
+    return (
+      <>
+        <HeaderHome />
+        <RestaurantList perfis={restaurantes} />
+      </>
+    )
+  }
+  return <h4>Carregando...</h4>
 }
 
 export default Home

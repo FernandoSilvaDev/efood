@@ -1,24 +1,17 @@
 import { useParams } from 'react-router-dom'
-import { useEffect, useState } from 'react'
-import MenuList from '../../components/MenuList'
+import PerfilList from '../../components/PerfilList'
 import HeaderPerfil from '../../components/HeaderPerfil'
-import { RestaurantType } from '../Home'
+import { useGetPerfilQuery } from '../../Services/api'
+import Cart from '../../components/Cart'
 
 const Perfis = () => {
   const { id } = useParams()
-  // const [restaurante, setRestaurante] = useState<RestaurantType | null>(null)
-
-  const [restaurante, setRestaurante] = useState<RestaurantType>()
-
-  useEffect(() => {
-    fetch(`https://ebac-fake-api.vercel.app/api/efood/restaurantes/${id}`)
-      .then((res) => res.json())
-      .then((res) => setRestaurante(res))
-  }, [id])
+  const { data: restaurante } = useGetPerfilQuery(id!)
   return (
     <>
       <HeaderPerfil />
-      <MenuList menus={restaurante ? [restaurante] : []} />
+      <Cart />
+      <PerfilList menus={restaurante ? [restaurante] : []} />
     </>
   )
 }

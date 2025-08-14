@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { colors } from '../../styles'
+import { breakpoints, colors } from '../../styles'
 
 export const Image = styled.div`
   width: 100%;
@@ -12,6 +12,10 @@ export const Image = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+  }
+
+  @media (max-width: ${breakpoints.cellphone}) {
+    height: 300px;
   }
 `
 
@@ -26,4 +30,10 @@ export const Title = styled.h2`
   font-size: 36px;
   color: ${colors.redLight};
   text-align: center;
+
+  @media (max-width: ${breakpoints.cellphone}) {
+    width: 100%;
+    font-size: 24px;
+    padding-top: 56px;
+  }
 `

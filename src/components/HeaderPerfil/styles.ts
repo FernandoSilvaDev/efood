@@ -19,10 +19,6 @@ export const Image = styled.div`
   }
 `
 
-export const Logo = styled.div`
-  margin-left: 100px;
-`
-
 export const CategoryTitle = styled.h2`
   display: flex;
   padding-top: 25px;
@@ -64,4 +60,9 @@ export const ImageBanner = styled.div`
     z-index: 1; /* maior que o ::before */
     display: block;
   }
+`
+
+export const CartButton = styled.a`
+  font-size: 18px;
+  font-weight: 900;
 `

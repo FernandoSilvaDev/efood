@@ -6,7 +6,7 @@ export const ButtonContainer = styled.button`
   color: ${colors.redLight};
   background-color: ${colors.beige};
   font-size: 14px;
-  font-weight: bold;
+  font-weight: 900;
   padding: 4px 0px;
   display: block;
   width: 100%;
@@ -17,7 +17,7 @@ export const ButtonLink = styled(Link)`
   color: ${colors.beigeDark};
   background-color: ${colors.redLight};
   font-size: 14px;
-  font-weight: bold;
+  font-weight: 900;
   padding: 4px 6px;
   text-decoration: none;
   display: inline-block;

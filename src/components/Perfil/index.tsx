@@ -1,8 +1,11 @@
-import { useEffect, useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { useState } from 'react'
 import { Card, Descricao, Modal, ModalContent, Title } from './styles'
 import Button from '../Button'
 import { RestaurantType } from '../../pages/Home'
 import Close from '../../assets/img_logo/fechar.png'
+import { useGetHomeQuery } from '../../Services/api'
+import { add, open } from '../../store/reducers/cart'
 
 type Props = {
   name: string
@@ -18,24 +21,33 @@ interface ModalState {
   isVisible: boolean
 }
 
-const Menu = ({ name, description, image, portion, price }: Props) => {
+const Perfil = ({ name, description, image, portion, price, id }: Props) => {
+  const dispatch = useDispatch()
+  const addToCart = () => {
+    dispatch(
+      add({
+        id,
+        nome: name,
+        descricao: description,
+        foto: image,
+        porcao: portion,
+        preco: price
+      })
+    )
+    dispatch(open())
+    closeModal()
+  }
+
   const [modal, setModal] = useState<ModalState>({
     isVisible: false
   })
-  const closeMOdal = () => {
+  const closeModal = () => {
     setModal({
       isVisible: false
     })
   }
-  const [restaurantes, setRestaurantes] = useState<RestaurantType[]>([])
 
-  useEffect(() => {
-    fetch('https://ebac-fake-api.vercel.app/api/efood/restaurantes')
-      .then((res) => res.json())
-      .then((res) => setRestaurantes(res))
-  }, [])
-
-  // const restaurante = restaurantes.find(() => name)
+  const { data: restaurantes, isLoading } = useGetHomeQuery()
 
   if (!restaurantes) {
     return <h3>Carregando...</h3>
@@ -68,7 +80,7 @@ const Menu = ({ name, description, image, portion, price }: Props) => {
               })
             }}
             type="button"
-            title="Adicionar ao carrinho"
+            title="Mais detalhes"
           >
             Mais detalhes
           </Button>
@@ -87,7 +99,7 @@ const Menu = ({ name, description, image, portion, price }: Props) => {
                 alt="Icone de fechar"
                 // Para fechar o modal com o clique em qualquer parte da tela
                 onClick={() => {
-                  closeMOdal()
+                  closeModal()
                 }}
               />
             </div>
@@ -96,7 +108,7 @@ const Menu = ({ name, description, image, portion, price }: Props) => {
             </header>
             <p>{description}</p>
             <p>{portion}</p>
-            <Button type="button" to="#" title="Saiba mais">
+            <Button onClick={addToCart} type="button" title="Saiba mais">
               {`Adicione ao carrinho - R$ ${price}`}
             </Button>
           </div>
@@ -104,7 +116,7 @@ const Menu = ({ name, description, image, portion, price }: Props) => {
         <div
           // Para fechar o modal com o clique em qualquer parte da tela
           onClick={() => {
-            closeMOdal()
+            closeModal()
           }}
           className="overlay"
         ></div>
@@ -113,4 +125,4 @@ const Menu = ({ name, description, image, portion, price }: Props) => {
   )
 }
 
-export default Menu
+export default Perfil

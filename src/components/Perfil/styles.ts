@@ -1,6 +1,7 @@
 import styled from 'styled-components'
-import { colors } from '../../styles'
+import { breakpoints, colors } from '../../styles'
 import { TagContainer } from '../Tag/styles'
+import { ButtonContainer } from '../Button/styles'
 
 export const Card = styled.div`
   background-color: ${colors.redLight};
@@ -87,6 +88,9 @@ export const Modal = styled.div`
     width: 100%;
     background-color: rgba(0, 0, 0, 0.8);
   }
+
+  @media (max-width: ${breakpoints.cellphone}) {
+  }
 `
 
 export const ModalContent = styled.div`
@@ -134,5 +138,33 @@ export const ModalContent = styled.div`
     width: fit-content;
     padding: 4px 7px;
     cursor: pointer;
+  }
+
+  @media (max-width: ${breakpoints.cellphone}) {
+    display: grid;
+    place-items: center;
+    padding: 1rem;
+    text-align: center;
+
+    header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      h4 {
+        margin-bottom: 8px;
+      }
+    }
+
+    .close {
+      margin-left: 0;
+    }
+
+    ${ButtonContainer} {
+      margin: 0 auto;
+      display: block;
+      margin-bottom: 16px;
+    }
   }
 `

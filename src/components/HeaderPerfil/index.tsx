@@ -1,28 +1,28 @@
-import { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
-import { Image, Logo, Title, ImageBanner, CategoryTitle } from './styles'
+import { Image, Title, ImageBanner, CategoryTitle, CartButton } from './styles'
 import bannerImg from '../../assets/img_logo/Vector.svg'
 
 import logo from '../../assets/img_logo/logo.svg'
 // import { Link } from 'react-router-dom'
 import Button from '../Button'
-import { RestaurantType } from '../../pages/Home'
+import { useGetPerfilQuery } from '../../Services/api'
 
-// type Props = {
-//   type: string
-//   title: string
-//   cover: string
-// }
+import { open } from '../../store/reducers/cart'
+import { RootReducer } from '../../store'
 
 const HeaderPerfil = () => {
   const { id } = useParams()
-  const [restaurantes, setRestaurantes] = useState<RestaurantType>()
+  const { data: restaurantes } = useGetPerfilQuery(id!)
+  const dispatch = useDispatch()
 
-  useEffect(() => {
-    fetch(`https://ebac-fake-api.vercel.app/api/efood/restaurantes/${id}`)
-      .then((res) => res.json())
-      .then((res) => setRestaurantes(res))
-  }, [])
+  // Para contar items adicionado no carrinho
+  const { items } = useSelector((state: RootReducer) => state.cart)
+
+  // Abrir o carrinho
+  const openCart = () => {
+    dispatch(open())
+  }
 
   if (!restaurantes) {
     return <h3>Carregando...</h3>
@@ -34,12 +34,12 @@ const HeaderPerfil = () => {
           <Button variant="secondary" type="link" to="/" title="Restaurantes">
             Restaurantes
           </Button>
-          <Logo>
+          <div>
             <img src={logo} alt="eFood" />
-          </Logo>
-          <Button variant="secondary" type="link" to="#" title="Carrinho">
-            0 produtos(s) no carrinho
-          </Button>
+          </div>
+          <CartButton onClick={openCart} type="link" title="Carrinho">
+            {items.length} produto(s) no carrinho
+          </CartButton>
         </div>
       </Image>
       <ImageBanner style={{ backgroundImage: `url(${restaurantes.capa})` }}>

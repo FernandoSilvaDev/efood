@@ -1,9 +1,8 @@
-import { useEffect, useState } from 'react'
 import Estrela from '../../assets/img_logo/estrela.svg'
 import { Card, Descricao, Info, Grade, Title, Infos } from './styles'
 import Tag from '../Tag'
 import Button from '../Button'
-import { RestaurantType } from '../../pages/Home'
+import { useGetFeaturedRestaurantQuery } from '../../Services/api'
 
 type Props = {
   id: number
@@ -24,16 +23,7 @@ const Restaurant = ({
   grade,
   destacado
 }: Props) => {
-  const [restaurantes, setRestaurantes] = useState<RestaurantType[]>([])
-
-  useEffect(() => {
-    fetch('https://ebac-fake-api.vercel.app/api/efood/restaurantes')
-      .then((res) => res.json())
-      .then((res) => setRestaurantes(res))
-  }, [])
-
-  //Caso não encontre o produto vem esta mensagem
-  const restaurante = restaurantes.find(() => title)
+  const { data: restaurante, isLoading } = useGetFeaturedRestaurantQuery()
 
   if (!restaurante) {
     return <h3>Carregando...</h3>

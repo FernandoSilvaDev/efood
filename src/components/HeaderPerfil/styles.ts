@@ -65,4 +65,5 @@ export const ImageBanner = styled.div`
 export const CartButton = styled.a`
   font-size: 18px;
   font-weight: 900;
+  cursor: pointer;
 `

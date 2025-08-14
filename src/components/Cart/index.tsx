@@ -40,8 +40,8 @@ const Cart = () => {
       <Overlay onClick={closeCart} />
       <Sidebar>
         <ul>
-          {items.map((item) => (
-            <CartItem key={item.id}>
+          {items.map((item, index) => (
+            <CartItem key={`${item.id}-${index}`}>
               <img src={item.foto} alt="" />
               <div>
                 <h3>{item.nome}</h3>
@@ -57,6 +57,13 @@ const Cart = () => {
         </Prices>
         <Button type="button" title="Continuar para entrega">
           Continuar para entrega
+        </Button>
+        <Button
+          onClick={closeCart}
+          type="button"
+          title="Voltar para as compras"
+        >
+          Voltar para as compras
         </Button>
       </Sidebar>
     </CartContainer>

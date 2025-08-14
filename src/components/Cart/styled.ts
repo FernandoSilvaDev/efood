@@ -5,7 +5,7 @@ import Delete from '../../assets/img_logo/lixeira.png'
 import { ButtonContainer } from '../Button/styles'
 
 export const Overlay = styled.div`
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
@@ -40,6 +40,7 @@ export const Sidebar = styled.aside`
 
   ${ButtonContainer} {
     margin-bottom: 16px;
+    cursor: pointer;
   }
 
   @media (max-width: ${breakpoints.cellphone}) {

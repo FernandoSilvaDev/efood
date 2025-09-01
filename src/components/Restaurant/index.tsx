@@ -1,8 +1,10 @@
+import Loader from '../Loader'
 import Estrela from '../../assets/img_logo/estrela.svg'
-import { Card, Descricao, Info, Grade, Title, Infos } from './styles'
 import Tag from '../Tag'
 import Button from '../Button'
 import { useGetFeaturedRestaurantQuery } from '../../Services/api'
+
+import { Card, Descricao, Info, Grade, Title, Infos } from './styles'
 
 type Props = {
   id: number
@@ -23,10 +25,10 @@ const Restaurant = ({
   grade,
   destacado
 }: Props) => {
-  const { data: restaurante, isLoading } = useGetFeaturedRestaurantQuery()
+  const { data: restaurante } = useGetFeaturedRestaurantQuery()
 
   if (!restaurante) {
-    return <h3>Carregando...</h3>
+    return <Loader />
   }
 
   const getDescricao = (descricao: string) => {
@@ -55,7 +57,11 @@ const Restaurant = ({
           </Grade>
         </div>
         <Descricao>{getDescricao(description)}</Descricao>
-        <Button type="link" to={`/perfil/${id}`} title="Saiba mais">
+        <Button
+          type="link"
+          to={`/perfil/${id}`}
+          title={`Clique aqui para saber mais sobre o restaurante ${title}`}
+        >
           Saiba mais
         </Button>
       </Info>

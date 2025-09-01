@@ -29,8 +29,16 @@ export const CartContainer = styled.div`
   }
 `
 
+export const Message = styled.h2`
+  text-align: center;
+  color: ${colors.beige};
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 40px;
+`
+
 export const Sidebar = styled.aside`
-  background-color: ${colors.redLight};
+  background-color: ${colors.darkRed};
   z-index: 1;
   padding: 16px 8px;
   max-width: 360px;

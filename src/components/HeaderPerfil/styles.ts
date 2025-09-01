@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { colors } from '../../styles'
+import { breakpoints, colors } from '../../styles'
 
 export const Image = styled.div`
   position: relative;
@@ -9,13 +9,39 @@ export const Image = styled.div`
   background-repeat: repeat;
   background-size: cover;
 
+  img {
+    display: block;
+  }
+
   .container {
     position: relative;
-    padding-top: 63px;
+    padding-top: 62px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     z-index: 1;
+
+    @media (max-width: ${breakpoints.cellphone}) {
+      padding-top: 32px;
+    }
+  }
+
+  @media (max-width: ${breakpoints.cellphone}) {
+    .logoDesck {
+      display: none;
+      max-width: 80%;
+    }
+  }
+`
+
+export const LogoMobile = styled.div`
+  padding-top: 32px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+
+  @media (max-width: ${breakpoints.cellphone}) {
+    display: flex;
   }
 `
 
@@ -33,6 +59,10 @@ export const Title = styled.h2`
   font-size: 32px;
   font-weight: bold;
   color: ${colors.white};
+
+  @media (max-width: ${breakpoints.cellphone}) {
+    padding-top: 118px;
+  }
 `
 
 export const ImageBanner = styled.div`
@@ -62,8 +92,28 @@ export const ImageBanner = styled.div`
   }
 `
 
-export const CartButton = styled.a`
+export const CartButton = styled.span`
   font-size: 18px;
   font-weight: 900;
   cursor: pointer;
+  display: flex;
+
+  span {
+    margin-left: 8px;
+  }
+
+  img {
+    display: none;
+    margin-left: 8px;
+    filter: invert(63%) sepia(34%) saturate(747%) hue-rotate(310deg)
+      brightness(120%) contrast(90%);
+  }
+  @media (max-width: ${breakpoints.cellphone}) {
+    img {
+      display: flex;
+    }
+    span {
+      display: none;
+    }
+  }
 `

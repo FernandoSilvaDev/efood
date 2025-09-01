@@ -3,7 +3,7 @@ import { colors } from '../../styles'
 import { Link } from 'react-router-dom'
 
 export const ButtonContainer = styled.button`
-  color: ${colors.redLight};
+  color: ${colors.darkRed};
   background-color: ${colors.beige};
   font-size: 14px;
   font-weight: 900;
@@ -14,8 +14,8 @@ export const ButtonContainer = styled.button`
 `
 
 export const ButtonLink = styled(Link)`
-  color: ${colors.beigeDark};
-  background-color: ${colors.redLight};
+  color: ${colors.darkBeige};
+  background-color: ${colors.darkRed};
   font-size: 14px;
   font-weight: 900;
   padding: 4px 6px;
@@ -25,6 +25,6 @@ export const ButtonLink = styled(Link)`
 
 export const SecondaryButtonLink = styled(ButtonLink)`
   background-color: transparent;
-  color: ${colors.redLight};
+  color: ${colors.darkRed};
   font-size: 18px;
 `

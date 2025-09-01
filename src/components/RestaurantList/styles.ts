@@ -1,7 +1,8 @@
 import styled from 'styled-components'
 import { breakpoints } from '../../styles'
+import { Props } from '.'
 
-export const Container = styled.div`
+export const Container = styled.div<Omit<Props, 'isLoading'>>`
   padding-top: 80px;
 `
 

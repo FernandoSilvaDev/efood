@@ -1,18 +1,13 @@
 import { useDispatch, useSelector } from 'react-redux'
+
 import Button from '../Button'
-import { CartContainer, CartItem, Overlay, Prices, Sidebar } from './styled'
+
 import { RootReducer } from '../../store'
 import { close, remove } from '../../store/reducers/cart'
+import { openDelivery } from '../../store/reducers/delivery'
+import { parseToBrl } from '../../utils'
 
-/////////////////////////////////// Função para formatação de moedas de diferentes tipos
-export const formataPreco = (preco = 0) => {
-  // Intl. é uma API nativa do JavaScript, parte do objeto global, - 'pt-BR' define o local e (idioma e formato regional)
-  return new Intl.NumberFormat('pt-BR', {
-    // style: 'currency' e currency: 'BRL' diz que o estilo é moeda e a moeda é Real brasileiro (BRL).
-    style: 'currency',
-    currency: 'BRL'
-  }).format(preco) //.format(preco) aplica essa formatação ao número recebido.
-}
+import * as S from './styles'
 
 const Cart = () => {
   const { isOpen, items } = useSelector((state: RootReducer) => state.cart)
@@ -35,27 +30,58 @@ const Cart = () => {
     dispatch(remove(id))
   }
 
+  /////////////////////////////// Abrir Delivery
+  const openTheDelivery = () => {
+    dispatch(openDelivery())
+    dispatch(close())
+  }
+
+  // Condição caso não aja item no carrinho
+  if (items.length === 0) {
+    return (
+      <S.CartContainer className={isOpen ? 'is-open' : ''}>
+        <S.Overlay onClick={closeCart} />
+        <S.Sidebar>
+          <div className="container">
+            <S.Message>Seu carrinho está vazio!</S.Message>
+          </div>
+          <Button
+            onClick={closeCart}
+            type="button"
+            title="Voltar para as compras"
+          >
+            Voltar para as compras
+          </Button>
+        </S.Sidebar>
+      </S.CartContainer>
+    )
+  }
+
   return (
-    <CartContainer className={isOpen ? 'is-open' : ''}>
-      <Overlay onClick={closeCart} />
-      <Sidebar>
+    <S.CartContainer className={isOpen ? 'is-open' : ''}>
+      <S.Overlay onClick={closeCart} />
+      <S.Sidebar>
         <ul>
           {items.map((item, index) => (
-            <CartItem key={`${item.id}-${index}`}>
+            <S.CartItem key={`${item.id}-${index}`}>
               <img src={item.foto} alt="" />
               <div>
                 <h3>{item.nome}</h3>
-                <span>{formataPreco(item.preco)}</span>
+                <span>{parseToBrl(item.preco)}</span>
               </div>
               <button onClick={() => removeItem(item.id)} type="button" />
-            </CartItem>
+            </S.CartItem>
           ))}
         </ul>
-        <Prices>
+        <S.Prices>
           <p>Valor total</p>
-          <p>{formataPreco(getTotalPrice())}</p>
-        </Prices>
-        <Button type="button" title="Continuar para entrega">
+          <p>{parseToBrl(getTotalPrice())}</p>
+        </S.Prices>
+        <Button
+          onClick={openTheDelivery}
+          type="button"
+          title="Continuar para entrega"
+        >
           Continuar para entrega
         </Button>
         <Button
@@ -65,8 +91,8 @@ const Cart = () => {
         >
           Voltar para as compras
         </Button>
-      </Sidebar>
-    </CartContainer>
+      </S.Sidebar>
+    </S.CartContainer>
   )
 }
 

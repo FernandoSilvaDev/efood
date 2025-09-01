@@ -1,11 +1,12 @@
 import styled from 'styled-components'
+
 import { colors } from '../../styles'
 import { TagContainer } from '../Tag/styles'
 
 export const Card = styled.div`
   background-color: ${colors.white};
-  color: ${colors.redLight};
-  border: 1px solid ${colors.redLight};
+  color: ${colors.darkRed};
+  border: 1px solid ${colors.darkRed};
   margin-bottom: 48px;
   position: relative;
 

@@ -19,8 +19,9 @@ export const Image = styled.div`
   }
 `
 
-export const Logo = styled.div`
+export const Logo = styled.h1`
   padding-top: 64px;
+  line-height: 0;
 `
 
 export const Title = styled.h2`
@@ -28,7 +29,7 @@ export const Title = styled.h2`
   padding-top: 138px;
   font-weight: bold;
   font-size: 36px;
-  color: ${colors.redLight};
+  color: ${colors.darkRed};
   text-align: center;
 
   @media (max-width: ${breakpoints.cellphone}) {

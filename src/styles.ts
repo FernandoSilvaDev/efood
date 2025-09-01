@@ -2,8 +2,8 @@ import { createGlobalStyle } from 'styled-components'
 
 export const colors = {
   beige: '#FFF8F2',
-  beigeDark: '#FFEBD9',
-  redLight: '#E66767',
+  darkBeige: '#FFEBD9',
+  darkRed: '#E66767',
   white: '#FFFFFF'
 }
 
@@ -22,7 +22,7 @@ export const GlobalCss = createGlobalStyle`
 
   body {
     background-color: ${colors.beige};
-    color: ${colors.redLight};
+    color: ${colors.darkRed};
   }
 
   .container {

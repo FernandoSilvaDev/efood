@@ -1,11 +1,14 @@
 import { useDispatch } from 'react-redux'
 import { useState } from 'react'
-import { Card, Descricao, Modal, ModalContent, Title } from './styles'
-import Button from '../Button'
-import { RestaurantType } from '../../pages/Home'
-import Close from '../../assets/img_logo/fechar.png'
+import Loader from '../Loader'
+
 import { useGetHomeQuery } from '../../Services/api'
 import { add, open } from '../../store/reducers/cart'
+
+import Close from '../../assets/img_logo/fechar.png'
+import Button from '../Button'
+
+import { Card, Descricao, Modal, ModalContent, Title } from './styles'
 
 type Props = {
   name: string
@@ -47,10 +50,10 @@ const Perfil = ({ name, description, image, portion, price, id }: Props) => {
     })
   }
 
-  const { data: restaurantes, isLoading } = useGetHomeQuery()
+  const { data: restaurantes } = useGetHomeQuery()
 
   if (!restaurantes) {
-    return <h3>Carregando...</h3>
+    return <Loader />
   }
 
   const getDescricao = (descricao: string) => {
@@ -80,14 +83,14 @@ const Perfil = ({ name, description, image, portion, price, id }: Props) => {
               })
             }}
             type="button"
-            title="Mais detalhes"
+            title={`Clique aqui para saber mais detalhes do ${name}`}
           >
             Mais detalhes
           </Button>
         </div>
       </Card>
       {/* ////////////////////////////////////////// Modal */}
-      <Modal className={modal.isVisible ? 'visivel' : ''}>
+      <Modal className={modal.isVisible ? 'is-visible' : ''}>
         <ModalContent className="container">
           <div>
             <img className="imgItem" src={image} alt="Imagem do prato" />
@@ -98,9 +101,7 @@ const Perfil = ({ name, description, image, portion, price, id }: Props) => {
                 src={Close}
                 alt="Icone de fechar"
                 // Para fechar o modal com o clique em qualquer parte da tela
-                onClick={() => {
-                  closeModal()
-                }}
+                onClick={closeModal}
               />
             </div>
             <header>
@@ -108,16 +109,18 @@ const Perfil = ({ name, description, image, portion, price, id }: Props) => {
             </header>
             <p>{description}</p>
             <p>{portion}</p>
-            <Button onClick={addToCart} type="button" title="Saiba mais">
+            <Button
+              onClick={addToCart}
+              type="button"
+              title={`Adicione ${name} ao carrinho`}
+            >
               {`Adicione ao carrinho - R$ ${price}`}
             </Button>
           </div>
         </ModalContent>
         <div
           // Para fechar o modal com o clique em qualquer parte da tela
-          onClick={() => {
-            closeModal()
-          }}
+          onClick={closeModal}
           className="overlay"
         ></div>
       </Modal>

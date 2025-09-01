@@ -1,11 +1,12 @@
 import styled from 'styled-components'
+
 import { breakpoints, colors } from '../../styles'
 import { TagContainer } from '../Tag/styles'
 import { ButtonContainer } from '../Button/styles'
 
 export const Card = styled.div`
-  background-color: ${colors.redLight};
-  color: ${colors.beigeDark};
+  background-color: ${colors.darkRed};
+  color: ${colors.darkBeige};
   margin-bottom: 48px;
   position: relative;
   padding: 8px;
@@ -75,7 +76,7 @@ export const Modal = styled.div`
   align-items: center;
   justify-content: center;
 
-  &.visivel {
+  &.is-visible {
     //Ação de ao clicar na imagem
     display: flex;
   }
@@ -94,7 +95,7 @@ export const Modal = styled.div`
 `
 
 export const ModalContent = styled.div`
-  background-color: ${colors.redLight};
+  background-color: ${colors.darkRed};
   color: ${colors.white};
   max-width: 1024px;
   position: relative;

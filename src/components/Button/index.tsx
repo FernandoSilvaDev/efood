@@ -7,6 +7,7 @@ type Props = {
   onClick?: () => void
   children: React.ReactNode
   variant?: 'primary' | 'secondary'
+  className?: string
 }
 
 const Button = ({
